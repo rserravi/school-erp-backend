@@ -26,6 +26,9 @@ In the **backend** we are using:
 - mongoose: https://www.npmjs.com/package/mongoose 
 - dotenv: https://www.npmjs.com/package/dotenv 
 - bcrypt: https://www.npmjs.com/package/bcrypt
+- jsonwebtoken:  https://www.npmjs.com/package/jsonwebtoken
+- redis: https://redis.io/ 
+
 
 
 ## API Resources
@@ -40,3 +43,11 @@ All the user API router follows '/v1/user/'
 | 2     | '/v1/user/reset-password         | POST  | TODO     | No         | Verify email and email pin to reset the password |
 | 3     | '/v1/user/reset-password         | PATCH | TODO     | No         | Replace with new password.                      |
 | 4     | '/v1/user/{id}                   | GET   | TODO     | Yes        | Get users info             
+
+### Tokens API resources
+ 
+All the Tokens API router follows '/v1/tokens'
+ 
+| #     | Routers                          | Verbs | Progress | Is Private | Description                                      |
+| ----- | -------------------------------- | ----- | -------- | ---------- | ------------------------------------------------ |
+| 1     | '/v1/tokens'                     | GET   | DONE     |no          | Get a fresh access JWT              |

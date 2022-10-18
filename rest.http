@@ -1,0 +1,28 @@
+### User sign up endpoint
+POST http://localhost:3001/v1/user
+Content-Type: application/json
+
+{
+    "firstname": "Ruben",
+    "lastname": "Serra",
+    "company": "Rubotic",
+    "email": "e@2.com",
+    "password": "password1234"
+}
+
+### User sign in endpoint
+POST http://localhost:3001/v1/user/login
+Content-Type: application/json
+ 
+{
+   "email": "e@2.com",
+   "password": "password1234"
+}
+
+### Get a user profile endpoint
+GET http://localhost:3001/v1/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAMi5jb20iLCJpYXQiOjE2NjYxMTkwNTQsImV4cCI6MTY2NjExOTk1NH0.nEYRcWIQoqOS5E3HVEWc4CvXdOmDr_fg5YiLxh_2QDs
+
+### Get Refresh Token
+GET http://localhost:3001/v1/tokens
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiZUAyLmNvbSIsImlhdCI6MTY2NjExOTA1NCwiZXhwIjoxNjY4NzExMDU0fQ.ZxXayFiX6nVg5nJztw4iyRN1pLlyl_g5dPRRLU9ogV8
