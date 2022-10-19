@@ -1,10 +1,12 @@
 const express = require("express")
-const { insertUser, getUserbyEmail, getUserbyId, updatePassword } = require("../model/user/User.model");
+const { insertUser, getUserbyEmail, getUserbyId, updatePassword, storeUserRefreshJWT } = require("../model/user/User.model");
 const { hashPassword, comparePassword} = require("../helpers/bcrypt.helpers")
 const { createAccessJWT, createRefreshJWT}= require("../helpers/jwt.helpers")
 const { userAuthorization} = require("../middleware/authorization.middleware");
 const { setPasswordResetPin, getPinbyEmailPin, deletePin } = require("../model/restPin/RestPin.model");
 const { emailProcessor } = require("../helpers/email.helpers");
+const { resetPassReqValidation } = require("../middleware/formValidation.middleware");
+const { deleteJWT } = require("../helpers/redis.helpers");
 
 const router = express.Router();
  
@@ -91,8 +93,8 @@ router.post("/login", async (req,res) =>{
  });
 
 //Reset password
-router.post("/reset-password", async (req, res)=>{
- 
+router.post("/reset-password", resetPassReqValidation, async (req, res)=>{
+
     //A - Create and send password reset pin number
     //1- receive email
     const {email} = req.body;
@@ -152,6 +154,24 @@ router.patch("/reset-password", async (req, res)=>{
     }  
     res.json({status: "error", message:"Unable to update your password. Please, try again later."});
  });
+
+//Log out and clear tokens
+router.delete("/logout", userAuthorization, async(req,res)=>{
+    //1 - get jwt and verify // DONE by Middleware
+  
+    const {authorization} = req.headers;
+    const _id = req.userId;
+    //2 - delete accessJWT form redis database
+    deleteJWT({authorization});
+    //3 - delete refreshJWT from mongodb
+    const result = await storeUserRefreshJWT(_id, "");
+    if (result._id){
+        return res.json({status:"success", message:"Logged out"});
+    }
+    res.json({status:"error", message:"Unable to log you out. Try again later"});
+  
+ })
+ 
 
  
 module.exports = router;

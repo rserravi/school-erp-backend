@@ -18,17 +18,18 @@ Note: Make sure you have nodemon is installed in your system otherwise you can i
 ## Tech
 
 In the **backend** we are using:
-- express - https://www.npmjs.com/package/express 
-- body-parser - https://www.npmjs.com/package/body-parser 
-- cors - https://www.npmjs.com/package/cors 
-- helmet - https://www.npmjs.com/package/helmet 
-- morgan - https://www.npmjs.com/package/morgan
-- mongoose: https://www.npmjs.com/package/mongoose 
-- dotenv: https://www.npmjs.com/package/dotenv 
-- bcrypt: https://www.npmjs.com/package/bcrypt
-- jsonwebtoken:  https://www.npmjs.com/package/jsonwebtoken
-- redis: https://redis.io/ 
-- nodemailer: https://nodemailer.com/about/
+- express - https://www.npmjs.com/package/express - Fast, unopinionated, minimalist web framework
+- body-parser - https://www.npmjs.com/package/body-parser - Node.js body parsing middleware
+- cors - https://www.npmjs.com/package/cors - CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+- helmet - https://www.npmjs.com/package/helmet - help secure Express/Connect apps with various HTTP headers
+- morgan - https://www.npmjs.com/package/morgan - HTTP request logger middleware for node.js
+- mongoose: https://www.npmjs.com/package/mongoose - Mongoose MongoDB ODM
+- dotenv: https://www.npmjs.com/package/dotenv - Loads environment variables from .env file
+- bcrypt: https://www.npmjs.com/package/bcrypt - A bcrypt library for NodeJS.
+- jsonwebtoken:  https://www.npmjs.com/package/jsonwebtoken - JSON Web Token implementation (symmetric and asymmetric)
+- redis: https://redis.io/ - A modern, high performance Redis client
+- nodemailer: https://nodemailer.com/about/ - Easy as cake e-mail sending from your Node.js applications
+- joi: https://joi.dev/ - The most powerful schema description language and data validator for JavaScript.
 
 
 
@@ -40,10 +41,10 @@ All the user API router follows '/v1/user/'
  
 | #     | Routers                          | Verbs | Progress | Is Private | Description                                      |
 | ----- | -------------------------------- | ----- | -------- | ---------- | ------------------------------------------------ |
-| 1     | '/v1/user/login'                 | POST  | TODO     | No         | Verify user authentication and return JWT      |
+| 1     | '/v1/user/login'                 | POST  | DONE     | No         | Verify user authentication and return JWT      |
 | 2     | '/v1/user/reset-password         | POST  | DONE     | No         | Verify email and email pin to reset the password |
-| 3     | '/v1/user/reset-password         | PATCH | TODO     | No         | Replace with new password.                      |
-| 4     | '/v1/user/{id}                   | GET   | TODO     | Yes        | Get users info             
+| 3     | '/v1/user/reset-password         | PATCH | DONE     | No         | Replace with new password.                      |
+| 4     | '/v1/user/{id}                   | GET   | DONE     | Yes        | Get users info             
 
 ### Tokens API resources
  

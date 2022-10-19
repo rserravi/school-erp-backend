@@ -10,13 +10,13 @@ Content-Type: application/json
     "password": "password1234"
 }
 
-### User sign in endpoint
+### User log in endpoint
 POST http://localhost:3001/v1/user/login
 Content-Type: application/json
  
 {
    "email": "e@2.com",
-   "password": "password1234"
+   "password": "password2"
 }
 
 ### Get a user profile endpoint
@@ -32,7 +32,7 @@ POST http://localhost:3001/v1/user/reset-password
 Content-Type: application/json
 
 {
-   "email": "e@2.com"
+   "email": "e@e.com"
 }
 
 ### Update new password endpoint
@@ -44,4 +44,8 @@ Content-Type: application/json
    "pin": 843430,
    "newPassword": "password2"
 }
+
+### User Logout endopoint
+DELETE http://localhost:3001/v1/user/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAMi5jb20iLCJpYXQiOjE2NjYxNjY3NzQsImV4cCI6MTY2NjE2NzY3NH0.kVUvL1t0H8CwToq4auTY-SDLQ3TSXetnBHIFd0ynVis
 

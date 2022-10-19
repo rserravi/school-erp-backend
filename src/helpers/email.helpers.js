@@ -33,7 +33,7 @@ const emailProcessor = (email, pin, type)=>{
     switch (type) {
         case "request new password":
             info = {
-                from: '"Leanne Wiegand 👻" <leanne.wiegand57@ethereal.email>', // sender address
+                from: '"Nicola Vandervort 👻" <nicola.vandervort@ethereal.email>', // sender address
                 to: email + "", // list of receivers
                 subject: "Password reset pin ✔", // Subject line
                 text: "Here is your password reset pin: " + pin + ". This pin will expire in 1 day", // plain text body
