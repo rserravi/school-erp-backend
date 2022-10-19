@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const UserScheme = mongoose.Schema ({
+const UserSchema = mongoose.Schema ({
    firstname: {
        type: String,
        maxlenght: 50,
@@ -42,5 +42,5 @@ const UserScheme = mongoose.Schema ({
 });
  
 module.exports ={
-   UserScheme: mongoose.model('user', UserScheme)
+   UserSchema: mongoose.model('user', UserSchema)
 }

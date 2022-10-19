@@ -28,6 +28,7 @@ In the **backend** we are using:
 - bcrypt: https://www.npmjs.com/package/bcrypt
 - jsonwebtoken:  https://www.npmjs.com/package/jsonwebtoken
 - redis: https://redis.io/ 
+- nodemailer: https://nodemailer.com/about/
 
 
 
@@ -40,7 +41,7 @@ All the user API router follows '/v1/user/'
 | #     | Routers                          | Verbs | Progress | Is Private | Description                                      |
 | ----- | -------------------------------- | ----- | -------- | ---------- | ------------------------------------------------ |
 | 1     | '/v1/user/login'                 | POST  | TODO     | No         | Verify user authentication and return JWT      |
-| 2     | '/v1/user/reset-password         | POST  | TODO     | No         | Verify email and email pin to reset the password |
+| 2     | '/v1/user/reset-password         | POST  | DONE     | No         | Verify email and email pin to reset the password |
 | 3     | '/v1/user/reset-password         | PATCH | TODO     | No         | Replace with new password.                      |
 | 4     | '/v1/user/{id}                   | GET   | TODO     | Yes        | Get users info             
 

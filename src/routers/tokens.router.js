@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {verifyRefreshJWT} = require("../helpers/jwt.helpers");
+const { createAccessJWT, verifyRefreshJWT } = require("../helpers/jwt.helpers");
 const { getUserbyEmail } = require("../model/user/User.model");
 
 // RETURN REFRESH JWT

@@ -21,8 +21,27 @@ Content-Type: application/json
 
 ### Get a user profile endpoint
 GET http://localhost:3001/v1/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAMi5jb20iLCJpYXQiOjE2NjYxMTkwNTQsImV4cCI6MTY2NjExOTk1NH0.nEYRcWIQoqOS5E3HVEWc4CvXdOmDr_fg5YiLxh_2QDs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAMi5jb20iLCJpYXQiOjE2NjYxNjM5NjgsImV4cCI6MTY2NjE2NDg2OH0.TvNkK1JcJmsyKWO3nattyPZTW_ye_5pbBxqefuaOuLM
 
 ### Get Refresh Token
 GET http://localhost:3001/v1/tokens
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiZUAyLmNvbSIsImlhdCI6MTY2NjExOTA1NCwiZXhwIjoxNjY4NzExMDU0fQ.ZxXayFiX6nVg5nJztw4iyRN1pLlyl_g5dPRRLU9ogV8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiZUAyLmNvbSIsImlhdCI6MTY2NjE2Mzk2OCwiZXhwIjoxNjY4NzU1OTY4fQ.SNi8fqWNuwWrh2IKOHtjufzClbV4wSVB3q6Zubno1yw
+
+### Password reset endpoint
+POST http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+{
+   "email": "e@2.com"
+}
+
+### Update new password endpoint
+PATCH http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+ 
+{
+   "email": "e@2.com",
+   "pin": 843430,
+   "newPassword": "password2"
+}
+
