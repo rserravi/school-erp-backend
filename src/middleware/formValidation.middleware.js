@@ -1,3 +1,4 @@
+const { string } = require("joi");
 const Joi = require("joi");
  
 const email= Joi.string()
@@ -12,7 +13,9 @@ const newPassword = Joi.string()
        .max(30)
        .required();
             
-
+const shortString = Joi.string()
+       .max(30)
+       .allow(null)
  
 const resetPassReqValidation = (req, res, next) =>{
        const schema = Joi.object({email});
@@ -24,18 +27,38 @@ const resetPassReqValidation = (req, res, next) =>{
 }
 
 const updatePassValidation = (req, res, next) =>{
-    console.log(req.body);
-    const schema = Joi.object({email, pin, newPassword});
+       console.log(req.body);
+       const schema = Joi.object({email, pin, newPassword});
 
-    const value = schema.validate(req.body);
-    if(value.error){
-            res.json({status: "error", message: value.error.message});
-    }
-    next();
+       const value = schema.validate(req.body);
+       if(value.error){
+              res.json({status: "error", message: value.error.message});
+       }
+       next();
+}
+
+const newUserValidation = (req, res, next) =>{
+       const schema = Joi.object().keys({
+              firstname: shortString.required(),
+              lastname: shortString.required(),
+              company: shortString,
+              email: email,
+              password: newPassword,
+              submit: shortString
+       })
+       
+       const value = schema.validate(req.body);
+       console.log(value);
+       if(value.error){
+              return res.json({status: "error", message: value.error.message});
+       }
+       next();
+      
 }
 
  
 module.exports = {
        resetPassReqValidation,
-       updatePassValidation
+       updatePassValidation,
+       newUserValidation
 }

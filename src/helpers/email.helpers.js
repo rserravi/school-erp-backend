@@ -28,19 +28,21 @@ const send = async (message) =>{
     });
 }
  
-const emailProcessor = (email, pin, type)=>{
+const emailProcessor = (email, pin, type, verificationLink)=>{
     let info = ""
     switch (type) {
         case "request new password":
             info = {
-                from: '"Nicola Vandervort 👻" <nicola.vandervort@ethereal.email>', // sender address
+                from: process.env.EMAIL_SENDER_ADDRESS, // sender address
                 to: email + "", // list of receivers
                 subject: "Password reset pin ✔", // Subject line
-                text: "Here is your password reset pin: " + pin + ". This pin will expire in 1 day", // plain text body
+                text: "Here is your password reset pin: " + pin + ". This pin will expire in 1 day. Please, follow the link to introduce your new password" + verificationLink , // plain text body
                 html: `<b>Hello</b>
                     Here is your password reset pin
                     <b>${pin}</b>
                     <p>This pin will expire in 1 day"</p>
+                    <p>Please, follow the <b>link</b> to introduce your new password</p>
+                    <p><a href=${verificationLink}>${verificationLink}</a></p>
                     `, //html body
             }
       
@@ -50,7 +52,7 @@ const emailProcessor = (email, pin, type)=>{
        
         case "password update success":
             info = {
-                from: '" Nicola Vandervort 👻" <nicola.vandervort@ethereal.email>', // sender address
+                from: process.env.EMAIL_SENDER_ADDRESS, // sender address
                 to: email + "", // list of receivers
                 subject: "Password updated ✔", // Subject line
                 text: "Your password has been updated. You can login now", // plain text body
@@ -62,6 +64,22 @@ const emailProcessor = (email, pin, type)=>{
             retorno = send(info);
             return retorno;
             break;
+
+        case "new user confirmation":
+            info = {
+                from: process.env.EMAIL_SENDER_ADDRESS, // sender address
+                to: email + "", // list of receivers
+                subject: "User created. Verify new user ✔", // Subject line
+                text: "Please, follow the link to confirm that you are you", // plain text body
+                html: `<b>Please confirm your email</b>
+                    <p>Pleas, follow the <b>link</b> to confirm that you are really <b>you</b></p>
+                    <p><a href=${verificationLink}>${verificationLink}</a></p>
+                    `, //html body
+            }
+            retorno = send(info);
+            return retorno;
+            break;
+     
         default:
             break;
     }

@@ -1,0 +1,13 @@
+MONGO_URL=mongodb://localhost/school-erp-main
+REDIS_URL = redis://localhost:6379
+JWT_ACCESS_SECRET = Random sequence of characters, as long or short as you want
+JWT_REFRESH_SECRET = Random sequence of characters, as long or short as you want
+JWT_REFRESH_SECRET_EXP_DAY = 30
+EMAIL_HOST = smtp.ethereal.email
+EMAIL_PORT = 587
+EMAIL_AUTH_USER = nicola.vandervort@ethereal.email
+EMAIL_AUTH_PASS = fcFZ5SjzB24Qvq7gXH 
+VERIFICATION_URL = http://localhost:3000/verification
+EMAIL_SENDER_ADDRESS = "Nicola Vandervort 👻" <nicola.vandervort@ethereal.email>
+
+

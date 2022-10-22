@@ -38,6 +38,21 @@ const UserSchema = mongoose.Schema ({
             default: Date.now()
         },
     },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    isCompleted: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    randomURL: {
+        type: String,
+        maxLenght: 100,
+        default:""
+    }
 
 });
  
