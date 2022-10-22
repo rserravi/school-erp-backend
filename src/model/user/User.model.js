@@ -29,7 +29,7 @@ const getUserbyEmail = email =>{
     return new Promise((resolve,reject)=>{
         if((!userId)) return false;
         try{
-            UserSchema.findOne({userId}, (error, data)=>{
+            UserSchema.findOne({"_id": userId}, (error, data)=>{
             if(error){
                 reject(error);
             }
@@ -45,7 +45,7 @@ const getUserbyEmail = email =>{
  
 
 const storeUserRefreshJWT = (_id, token) => {
-    console.log(_id);
+    console.log("ID y TOKEN EN STORE REFRESH EN MONGO",_id, token);
     return new Promise((resolve, reject)=>{
         try {
             UserSchema.findOneAndUpdate(

@@ -6,12 +6,13 @@ const { getUserbyEmail } = require("../model/user/User.model");
 // RETURN REFRESH JWT
 router.get("/", async (req, res, next) => {
     const  {authorization} = req.headers;
-    console.log(authorization);
+    console.log("AUTH TOKEN ", authorization);
     //1. Make sure the token is valid
     const decoded = await verifyRefreshJWT(authorization);
     if (decoded.payload){ //payload has the email
         //2. Check if the jwt exists in database (mongo)
         const userProf = await getUserbyEmail(decoded.payload);
+        console.log ("THIS IS USER PROFILE", userProf)
   
         if (userProf.id) {
             let tokenExp = userProf.refreshJWT.addedAt;

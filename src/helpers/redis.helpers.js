@@ -22,10 +22,12 @@ const checkRedis = async() => {
  }
  
 const setJWT = (key, value) =>{
+    console.log("CREANDO ACCESSJWT EN REDIS", key, value)
     return new Promise(async(resolve, reject)=>{
   
         try {    
-            await checkRedis();
+            await checkRedis(); 
+            // BUG ALERT:!!!! Aqui peta
             client.set(key, value, (err, res)=>{
                 if(err) reject(err)
                 resolve(res)

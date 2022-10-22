@@ -20,9 +20,16 @@ router.all("/", (req, res, next) =>{
 
 //Get user profile router
 router.get("/", userAuthorization, async (req,res)=>{
-   const _id = req.userId;
-   const userProf = await getUserbyId(_id);
-   res.json ({user: userProf});
+  
+   const _id = req.userId; // Comes from middleware userAuthorization
+   console.log("GETTING USER PROFILE OF", _id);
+   if (_id){
+    
+    const userProf = await getUserbyId(_id);
+    console.log("USER PROFILE OF", _id, "FOUND", userProf)
+    res.json ({user: userProf});
+   }
+   return ({status: "error", message: "no ID indicated"})
 
 
  })
@@ -55,7 +62,7 @@ router.post("/", newUserValidation, async(req, res) => {
         console.log("Insert User Result",result);
         //Send confirmation email
         await emailProcessor(email, "", "new user confirmation",verificationLink);
-        res.json({status: "success", message: "New user created", result});
+        res.json({status: "success", message: "New user created. Check your email for a verification link", result});
 
     } catch(err){
         let message = "Unable to create new user at the moment. Pleaset contatn administrator"
@@ -80,7 +87,7 @@ router.post("/login", async (req,res) =>{
     //get user with email from db
     try {
         const user = await getUserbyEmail(email);
-        console.log(user);
+        console.log("GET USER BY EMAIL", user);
         const passFromDb = user && user.id ? user.password : null;
        
         if(!passFromDb)
