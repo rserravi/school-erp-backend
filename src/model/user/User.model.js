@@ -13,7 +13,7 @@ const getUserbyEmail = email =>{
     return new Promise((resolve,reject)=>{
         if((!email)) return false;
         try{
-            UserSchema.findOne({email}, (error, data)=>{
+            UserSchema.findOne({'email.emailUrl':email}, (error, data)=>{
             if(error){
                 resolve(error);
             }

@@ -11,7 +11,8 @@ router.get("/", async (req, res, next) => {
     const decoded = await verifyRefreshJWT(authorization);
     if (decoded.payload){ //payload has the email
         //2. Check if the jwt exists in database (mongo)
-        const userProf = await getUserbyEmail(decoded.payload);
+        console.log("DECODED PAYLOAD IN TOKEN", decoded.payload)
+        const userProf = await getUserbyEmail(decoded.payload[0].emailUrl);
         console.log ("THIS IS USER PROFILE", userProf)
   
         if (userProf.id) {
@@ -27,7 +28,7 @@ router.get("/", async (req, res, next) => {
             }
   
             const accessJWT = await createAccessJWT(decoded.payload, userProf._id.toString());
-  
+            console.log ("Refresh JWT (GET)", )
             return res.json({status: "success", accessJWT});
         }
     }

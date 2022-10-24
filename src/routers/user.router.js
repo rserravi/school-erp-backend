@@ -8,6 +8,7 @@ const { emailProcessor } = require("../helpers/email.helpers");
 const { resetPassReqValidation, newUserValidation } = require("../middleware/formValidation.middleware");
 const { deleteJWT } = require("../helpers/redis.helpers");
 const { randomCrypto } = require("../helpers/crypto.helpers");
+const { profileCompletness } = require("../utils/profileChecker");
 
 
 const router = express.Router();
@@ -25,8 +26,10 @@ router.get("/", userAuthorization, async (req,res)=>{
    console.log("GETTING USER PROFILE OF", _id);
    if (_id){
     
-    const userProf = await getUserbyId(_id);
+    let userProf = await getUserbyId(_id);
     console.log("USER PROFILE OF", _id, "FOUND", userProf)
+    userProf.isCompleted = profileCompletness(userProf);
+    
     res.json ({user: userProf});
    }
    return ({status: "error", message: "no ID indicated"})
@@ -49,10 +52,9 @@ router.post("/", newUserValidation, async(req, res) => {
        const newUserObj = {
            firstname,
            lastname,
-           company,
-           email,
+           company :{name: company},
+           email: [{emailUrl: email, emailDescription:"work"}],
            password:hashedPass,
-           isCompleted: 10,
            isVerified: false,
            randomURL: randomUrl
 
@@ -65,6 +67,7 @@ router.post("/", newUserValidation, async(req, res) => {
         res.json({status: "success", message: "New user created. Check your email for a verification link", result});
 
     } catch(err){
+        console.log(err)
         let message = "Unable to create new user at the moment. Pleaset contatn administrator"
         if (err.message.includes("duplicate key")){
             message = "This email already has an account"

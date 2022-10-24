@@ -6,8 +6,8 @@ Content-Type: application/json
     "firstname": "Ruben",
     "lastname": "Serra",
     "company": "Rubotic",
-    "email": "e@2.com",
-    "password": "password1234"
+    "email": "rserravi@gmail.com",
+    "password": "pantera0"
 }
 
 ### User log in endpoint
@@ -15,8 +15,8 @@ POST http://localhost:3001/v1/user/login
 Content-Type: application/json
  
 {
-   "email": "e@2.com",
-   "password": "password2"
+   "email": "rserravi@gmail.com",
+   "password": "pantera0"
 }
 
 ### Get a user profile endpoint
