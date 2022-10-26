@@ -22,6 +22,10 @@ const UserSchema = mongoose.Schema ({
         uploadTime: {
             type: Date,
             default: Date.now,
+        },
+        type: {
+            type: String,
+            maxLenght: 20
         }
     },
     company: {
@@ -44,10 +48,10 @@ const UserSchema = mongoose.Schema ({
                         default: Date.now,
                     }
             },
-            web: {type: String},
+            website: {type: String},
             address: [],
-            phone:[],
-            email:[],
+            phones:[],
+            emails:[],
             social:[],
             mongoDataBase: ""
         },
@@ -96,9 +100,9 @@ const UserSchema = mongoose.Schema ({
         maxLenght: 100,
         default:""
     },
-    email: [],
+    emails: [],
     address: [],
-    tel: [],
+    phones: [],
     social: []
 
 });

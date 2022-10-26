@@ -105,6 +105,26 @@ const verifyUser = (randomURL,email) =>{
         }
     })
 }
+
+const updateUser = (_id, userObj) =>{
+    return new Promise((resolve,reject)=>{
+        try {
+            UserSchema.findByIdAndUpdate(
+                {_id},
+                {$set: userObj},
+                {new: true}, (error, data) =>{
+                    if(error){
+                        reject(error);
+                    }
+                    resolve(data);
+                    console.log(data);
+                    }
+            ).clone();
+        } catch (error) {
+            reject(error);       
+        }
+    })
+ }
  
  
  
@@ -114,5 +134,6 @@ module.exports = {
    getUserbyId,
    storeUserRefreshJWT,
    updatePassword,
-   verifyUser
+   verifyUser,
+   updateUser
 };

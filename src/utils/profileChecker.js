@@ -9,7 +9,7 @@ const profileCompletness = user => {
     if (user.password) {percent+=4.5};
     if (user.email) {percent+=5};
     if (user.address) {percent+=4.5};
-    if (user.tel) {percent+=4.5};
+    if (user.phones) {percent+=4.5};
     if (user.social) {percent+=4.5};
 
     

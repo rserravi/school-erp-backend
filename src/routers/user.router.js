@@ -1,5 +1,5 @@
 const express = require("express")
-const { insertUser, getUserbyEmail, getUserbyId, updatePassword, storeUserRefreshJWT, verifyUser } = require("../model/user/User.model");
+const { insertUser, getUserbyEmail, getUserbyId, updatePassword, storeUserRefreshJWT, verifyUser, updateUser } = require("../model/user/User.model");
 const { hashPassword, comparePassword} = require("../helpers/bcrypt.helpers")
 const { createAccessJWT, createRefreshJWT}= require("../helpers/jwt.helpers")
 const { userAuthorization} = require("../middleware/authorization.middleware");
@@ -28,7 +28,7 @@ router.get("/", userAuthorization, async (req,res)=>{
     
     let userProf = await getUserbyId(_id);
     console.log("USER PROFILE OF", _id, "FOUND", userProf)
-    userProf.isCompleted = profileCompletness(userProf);
+   //userProf.isCompleted = profileCompletness(userProf);
     
     res.json ({user: userProf});
    }
@@ -53,7 +53,7 @@ router.post("/", newUserValidation, async(req, res) => {
            firstname,
            lastname,
            company :{name: company},
-           email: [{emailUrl: email, emailDescription:"work"}],
+           email: [{emailUrl: email, emailDescription:"Work"}],
            password:hashedPass,
            isVerified: false,
            randomURL: randomUrl
@@ -76,6 +76,32 @@ router.post("/", newUserValidation, async(req, res) => {
         res.json({status:"error", message});
     }
  });
+
+ //Update user
+
+ router.patch("/", async(req, res)=>{
+    
+    try {
+        
+        const {_id} = req.body;
+        console.log("IN USER PATCH, updating", req.body)
+        if (_id){
+            await updateUser(_id, req.body).then((data)=>
+                {
+                    console.log("Result of UpdateUser return in Patch userRouter", data)
+                    return res.json({status: "success", message:"User Updated"});
+                })
+                .catch((error)=>{
+                    return res.json({status:"error", error});
+                })
+           
+        }        
+    } catch (err) {
+        console.log(err)
+        return res.json({status:"error", err});
+        
+    }
+ })
 
  //User sign in Router
 router.post("/login", async (req,res) =>{
