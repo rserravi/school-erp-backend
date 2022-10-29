@@ -3,10 +3,10 @@ POST http://localhost:3001/v1/user
 Content-Type: application/json
 
 {
-    "firstname": "Ruben",
+    "firstname": "Jav",
     "lastname": "Serra",
     "company": "Rubotic",
-    "email": "rserravi@gmail.com",
+    "email": "javiaasdasd@gmail.com",
     "password": "pantera0"
 }
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint
 GET http://localhost:3001/v1/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAMi5jb20iLCJpYXQiOjE2NjYxNjM5NjgsImV4cCI6MTY2NjE2NDg2OH0.TvNkK1JcJmsyKWO3nattyPZTW_ye_5pbBxqefuaOuLM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjY5NDIzMjMsImV4cCI6MTY2Njk0MzIyM30.KY2yQpf-joT2KDVVvdjo5BAc1D54j0XNnEg2NEzonIw
 
 ### Get Refresh Token
 GET http://localhost:3001/v1/tokens
@@ -54,3 +54,85 @@ PATCH http://localhost:3001/v1/user
 Content-Type: application/json
 
 {"picture":{"filename":"","file":"data:image/jpeg;base64,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","type":"base64","uploadTime":1666771747626},"company":{"logo":{"uploadTime":"2022-10-24T12:07:04.193Z"},"phones":[],"emails":[],"name":"Rubotic","address":[],"phone":[],"email":[],"social":[]},"refreshJWT":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjpbeyJlbWFpbFVybCI6InJzZXJyYXZpQGdtYWlsLmNvbSIsImVtYWlsRGVzY3JpcHRpbyI6IndvcmsifV0sImlhdCI6MTY2NjYyNDkwMSwiZXhwIjoxNjY5MjE2OTAxfQ.GiMayhtr3V34_megXrFfPlp90-eFU6_uV4dFmnbWRCs","addedAt":"2022-10-24T15:21:41.589Z"},"_id":"63567fe83121d48aad8d157e","firstname":"Rubena","lastname":"Serra","password":"$2b$10$glLQT1MR2CcPr8/PQktQPeB6A.mh0oLzwnvW.H4ApRpCsvFtJpuSy","isVerified":true,"isCompleted":0,"randomURL":"db488511e29d41e53ef1acc74810df9b533e1a58","address":[{"id":0,"name":"Other","streetAddress":"Costa Rica ","cityAddress":"","stateProvinceAddress":"","postcodeAddress":"","countryAddress":""}],"social":[{"id":0,"socialNetwork":"Youtube","socialUser":"rserrav"}],"birthdate":"2022-10-24T12:07:04.194Z","__v":0,"phones":[{"id":0,"name":"Mobile","telNum":"+3472230301"}],"emails":[{"emailUrl":"rserravi@gmail.com","emailDescription":"work"}],"gender":"female","dni":"43527458G"}
+
+### Equipment Add endpoint
+POST http://localhost:3001/v1/equipment?db=Rubotic16189
+Content-Type: application/json
+
+{
+   "name": "Computer 1",
+   "description": "Pc computer with office and Photoshop, 16Gb Ram"
+}
+
+
+### Classrooom Add endpoint
+POST http://localhost:3001/v1/classroom?db=Rubotic16189
+Content-Type: application/json
+
+{
+   "name": "Classroom 1",
+   "code": "CLR1",
+   "picture":{"filename":"","file":"","type":"jpg"},
+   "capacity": 15,
+   "equipment": [{
+      "equipmentId": "635ce7a1c232aca19d7f0f6e"
+   }],
+   "weekAvailability":{
+      "monday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "15:30",
+         "close2": "20: 00"
+      },
+      "tuesday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "15:30",
+         "close2": "20: 00"
+      },
+      "wednesday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "15:30",
+         "close2": "20: 00"
+      },
+      "thursday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "15:30",
+         "close2": "20: 00"
+      },
+      "friday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "15:30",
+         "close2": "20: 00"
+      },
+      "saturday":{
+         "open1": "8:30",
+         "close1": "13: 00",
+         "open2": "",
+         "close2": ""
+      },
+      "sunday":{
+         "open1": "",
+         "close1": "",
+         "open2": "",
+         "close2": ""
+      }
+   }
+}
+
+### Subject Add endpoint
+POST http://localhost:3001/v1/subject?db=Rubotic16189
+Content-Type: application/json
+
+{
+   "name": "Maths",
+   "code": "PG1",
+   "specialReq" :[{
+      "equipmentId": "635ce7a1c232aca19d7f0f6e"
+   }],
+   "tests":[],
+   "costPrevision":350.50
+}

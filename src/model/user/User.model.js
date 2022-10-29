@@ -1,8 +1,14 @@
 const {UserSchema} = require("./User.scheme");
- 
-const insertUser = userObj => {
-   return new Promise((resolve, reject)=>{
-       UserSchema(userObj)
+const mainDataBaseName = process.env.MAIN_DATABASE_NAME;
+
+const insertUser = userObj => { 
+   return new Promise(async (resolve, reject)=>{ 
+
+       const dbConnection = await global.clientConnection
+       const db = await dbConnection.useDb(mainDataBaseName)
+       const User = await db.model("user",UserSchema)
+
+       User(userObj)
        .save()
        .then(data => resolve(data))
        .catch(error => reject(error))
@@ -10,10 +16,15 @@ const insertUser = userObj => {
 };
 
 const getUserbyEmail = email =>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         if((!email)) return false;
         try{
-            UserSchema.findOne({'email.emailUrl':email}, (error, data)=>{
+            User.findOne({'emails.emailUrl':email}, (error, data)=>{
             if(error){
                 resolve(error);
             }
@@ -26,10 +37,15 @@ const getUserbyEmail = email =>{
  };
 
  const getUserbyId = userId =>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         if((!userId)) return false;
         try{
-            UserSchema.findOne({"_id": userId}, (error, data)=>{
+            User.findOne({"_id": userId}, (error, data)=>{
             if(error){
                 reject(error);
             }
@@ -45,10 +61,16 @@ const getUserbyEmail = email =>{
  
 
 const storeUserRefreshJWT = (_id, token) => {
+
     console.log("ID y TOKEN EN STORE REFRESH EN MONGO",_id, token);
-    return new Promise((resolve, reject)=>{
+    return new Promise(async (resolve, reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         try {
-            UserSchema.findOneAndUpdate(
+            User.findOneAndUpdate(
                 {_id},
                 {$set: {"refreshJWT.token": token, "refreshJWT.addedAt": Date.now()}},
                 {new: true}, (error, data) =>{
@@ -66,9 +88,14 @@ const storeUserRefreshJWT = (_id, token) => {
 }
  
 const updatePassword = (email, newHashedPass) =>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         try {
-            UserSchema.findOneAndUpdate(
+            User.findOneAndUpdate(
                 {email},
                 {$set:{"password": newHashedPass}},
                 {new: true}, (error, data) =>{
@@ -86,9 +113,14 @@ const updatePassword = (email, newHashedPass) =>{
  }
 
 const verifyUser = (randomURL,email) =>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         try {
-            UserSchema.findOneAndUpdate(
+            User.findOneAndUpdate(
                 {randomURL, email},
                 {$set:{"isVerified": true}}
                 )
@@ -107,9 +139,14 @@ const verifyUser = (randomURL,email) =>{
 }
 
 const updateUser = (_id, userObj) =>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const User = await db.model("user",UserSchema)
+
         try {
-            UserSchema.findByIdAndUpdate(
+            User.findByIdAndUpdate(
                 {_id},
                 {$set: userObj},
                 {new: true}, (error, data) =>{

@@ -28,10 +28,18 @@ const setJWT = (key, value) =>{
         try {    
             await checkRedis(); 
             // BUG ALERT:!!!! Aqui peta
+            //console.log("REDIS ESTA FUNCIONANDO")
             client.set(key, value, (err, res)=>{
-                if(err) reject(err)
-                resolve(res)
+                if(err){ 
+                    //console.log("ERROR EN EL SETJWT DE REDIS.HELPERS")
+                    reject(err)
+                }
+                else {
+                    //console.log("SE HA CREADO KEY=",key, "CON VALUE", value, " Y RESPUESTA", res)
+                    resolve(res)
+                }
             });
+            
         } catch (error) {
             reject(error);
         }
@@ -44,10 +52,14 @@ const setJWT = (key, value) =>{
         try {
             await checkRedis()
             client.get(key, (err, res)=>{
-                if(err) reject(err)
-                resolve(res)
+                if(err) {reject(err);console.log("NO EXISTE LA CLAVE ", key, "EN REDIS. ERROR:", err)}
+                else{
+                    resolve(res)
+                    //console.log("DATOS EN GETJWT", res)
+                }
             });
         } catch (error) {
+            
             reject(error);
         }
     })

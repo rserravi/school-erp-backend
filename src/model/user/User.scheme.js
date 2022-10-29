@@ -108,5 +108,5 @@ const UserSchema = mongoose.Schema ({
 });
  
 module.exports ={
-   UserSchema: mongoose.model('user', UserSchema)
+   UserSchema
 }

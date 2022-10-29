@@ -22,5 +22,5 @@ const ResetPinSchema = new Schema({
 });
  
 module.exports ={
-   ResetPinSchema: mongoose.model('Reset_pin', ResetPinSchema)
+   ResetPinSchema
 }

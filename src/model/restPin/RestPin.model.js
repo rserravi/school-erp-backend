@@ -1,15 +1,21 @@
 const randomGenerator = require("../../utils/randomGenerator");
 const { ResetPinSchema } = require("./RestPin.schema");
- 
+
+
 const setPasswordResetPin = (email) =>{
-const randPin = randomGenerator(6);
+   const randPin = randomGenerator(6);
 
    const resetObj = {
        email,
        pin : randPin,
    }
-   return new Promise((resolve,reject) => {
-       ResetPinSchema(resetObj)
+   return new Promise(async (resolve,reject) => {
+
+    const dbConnection = await global.clientConnection
+    const db = await dbConnection.useDb(mainDataBaseName)
+    const Pin =  await db.model('Reset_pin', ResetPinSchema)
+    
+    Pin(resetObj)
            .save()
            .then((data) => resolve(data))
            .catch((error) => reject(error));
@@ -17,9 +23,14 @@ const randPin = randomGenerator(6);
 };
 
 const getPinbyEmailPin = (email, pin) =>{
-    return new Promise((resolve, reject)=>{
+    return new Promise(async (resolve, reject)=>{
+
+        const dbConnection = await global.clientConnection
+        const db = await dbConnection.useDb(mainDataBaseName)
+        const Pin =  await db.model('Reset_pin', ResetPinSchema)
+        
         try {
-            ResetPinSchema.findOne({email, pin}, (error, data)=>{
+            Pin.findOne({email, pin}, (error, data)=>{
                 if (error){
                     console.log(error);
                     resolve(false);
@@ -35,9 +46,14 @@ const getPinbyEmailPin = (email, pin) =>{
     });
  }
  
-const deletePin = (email, pin) =>{
+const deletePin = async (email, pin) =>{
+
+    const dbConnection = await global.clientConnection
+    const db = await dbConnection.useDb(mainDataBaseName)
+    const Pin =  await db.model('Reset_pin', ResetPinSchema)
+    
     try {
-        ResetPinSchema.findOneAndDelete({email, pin}, (error, data)=>{
+        Pin.findOneAndDelete({email, pin}, (error, data)=>{
             if (error){
                 console.log(error);
             }

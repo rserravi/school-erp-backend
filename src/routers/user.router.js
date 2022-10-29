@@ -8,7 +8,6 @@ const { emailProcessor } = require("../helpers/email.helpers");
 const { resetPassReqValidation, newUserValidation } = require("../middleware/formValidation.middleware");
 const { deleteJWT } = require("../helpers/redis.helpers");
 const { randomCrypto } = require("../helpers/crypto.helpers");
-const { profileCompletness } = require("../utils/profileChecker");
 
 
 const router = express.Router();
@@ -21,7 +20,7 @@ router.all("/", (req, res, next) =>{
 
 //Get user profile router
 router.get("/", userAuthorization, async (req,res)=>{
-  
+   console.log ("GET '/'")
    const _id = req.userId; // Comes from middleware userAuthorization
    console.log("GETTING USER PROFILE OF", _id);
    if (_id){
@@ -116,7 +115,7 @@ router.post("/login", async (req,res) =>{
     //get user with email from db
     try {
         const user = await getUserbyEmail(email);
-        console.log("GET USER BY EMAIL", user);
+        //console.log("LOGIN POST: GET USER BY EMAIL: ", user);
         const passFromDb = user && user.id ? user.password : null;
        
         if(!passFromDb)
@@ -124,12 +123,13 @@ router.post("/login", async (req,res) =>{
         });
       
         const result = await comparePassword(password, passFromDb);
-        console.log(result);
+        //console.log("COMPARE PASSWORD", result);
        
         if (!result) {
             return res.json({status: "error", message: "Incorrect Password"});
         }
-        const accessJWT = await createAccessJWT(user.email, `${user._id}`);
+        const accessJWT = await createAccessJWT(user.email, `${user._id}`)
+        //console.log("CREANDO ACCESSJWT DESDE LOGIN", accessJWT)
         const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
 
         return res.json({

@@ -9,7 +9,7 @@ try {
         {expiresIn:"15m"}
     );
     
-    await setJWT(accessJWT, _id);
+    await setJWT(accessJWT, _id).then((data)=>{console.log("DATA RETORNADA DE SETJWT",data)}).catch((err)=>{console.log("ERROR EN DATA DE SETJWT",err)})
     return Promise.resolve(accessJWT);
             
     } catch (error) {
