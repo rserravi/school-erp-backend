@@ -31,6 +31,7 @@ const tokensRouter = require("./src/routers/tokens.router");
 const equipmentRouter = require("./src/routers/equipment.router");
 const classroomRouter = require("./src/routers/classroom.router")
 const subjectRouter = require("./src/routers/subject.router")
+const personRouter = require("./src/routers/person.router")
 
  
 //USE ROUTERS
@@ -39,6 +40,7 @@ app.use("/v1/tokens", tokensRouter);
 app.use("/v1/equipment", equipmentRouter);
 app.use("/v1/classroom", classroomRouter);
 app.use("/v1/subject", subjectRouter)
+app.use("/v1/person",personRouter)
 
 
 //Error handler
